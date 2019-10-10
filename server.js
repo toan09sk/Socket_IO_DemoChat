@@ -26,6 +26,13 @@ io.on("connection", (socket) => {
             io.sockets.emit("server-send-danhsach-Users", mangUsers);
         }
     });
+
+    socket.on("logout", () => {
+        mangUsers.splice(
+            mangUsers.indexOf(socket.Username), 1
+        );
+        socket.broadcast.emit("server-send-danhsach-Users", mangUsers);
+    });
 });
 
 app.get("/", (req, res) => {

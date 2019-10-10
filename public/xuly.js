@@ -25,4 +25,10 @@ $(document).ready(() => {
     $("#btnRegister").click(() => {
         socket.emit("client-send-Username", $("#txtUsername").val());
     });
+
+    $("#btnLogout").click(() => {
+        socket.emit("logout");
+        $("#loginForm").show(2);
+        $("#chatForm").hide(1);
+    });
 });
