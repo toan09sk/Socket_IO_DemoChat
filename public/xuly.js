@@ -10,6 +10,14 @@ socket.on("server-send-dki-thanhcong", (data) => {
     $("#chatForm").show(1); //s
 });
 
+socket.on("server-send-danhsach-Users", (data) => {
+    $("#boxContent").html("");
+    data.forEach(element => {
+        $("#boxContent").append("<div class='user'>" + element + "</div>");
+    });
+
+});
+
 $(document).ready(() => {
     $("#loginForm").show();
     $("#chatForm").hide();

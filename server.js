@@ -9,7 +9,7 @@ var server = require("http").Server(app);
 var io = require("socket.io")(server);
 server.listen(3000);
 
-var mangUsers = ["AAA"];
+var mangUsers = [];
 
 io.on("connection", (socket) => {
     console.log("Co nguoi ket noi" + socket.id);
@@ -21,7 +21,9 @@ io.on("connection", (socket) => {
         } else {
             // Dang ki thanh cong
             mangUsers.push(data);
+            socket.Username = data;
             socket.emit("server-send-dki-thanhcong", data);
+            io.sockets.emit("server-send-danhsach-Users", mangUsers);
         }
     });
 });
