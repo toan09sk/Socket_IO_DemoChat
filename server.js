@@ -33,6 +33,11 @@ io.on("connection", (socket) => {
         );
         socket.broadcast.emit("server-send-danhsach-Users", mangUsers);
     });
+
+    socket.on("user-send-message", (data) => {
+        console.log(data);
+        io.sockets.emit("server-send-message", { un: socket.Username, nd: data });
+    });
 });
 
 app.get("/", (req, res) => {
