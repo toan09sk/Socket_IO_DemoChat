@@ -35,8 +35,17 @@ io.on("connection", (socket) => {
     });
 
     socket.on("user-send-message", (data) => {
-        console.log(data);
         io.sockets.emit("server-send-message", { un: socket.Username, nd: data });
+    });
+
+    socket.on("toi-dang-go-chu", () => {
+        var s = socket.Username + " dang go chu";
+        io.sockets.emit("ai-do-dang-go-chu", s);
+    });
+
+    socket.on("toi-stop-go-chu", () => {
+        var s = socket.Username + " Stop go chu";
+        io.sockets.emit("ai-do-STOP-go-chu", s);
     });
 });
 

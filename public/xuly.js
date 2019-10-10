@@ -21,9 +21,25 @@ socket.on("server-send-message", (data) => {
     $("#listMessages").append("<div class='ms'>" + data.un + ":" + data.nd + "</div>");
 });
 
+socket.on("ai-do-dang-go-chu", (data) => {
+    $("#thongbao").html(data);
+});
+
+socket.on("ai-do-STOP-go-chu", () => {
+    $("#thongbao").html("");
+});
+
 $(document).ready(() => {
     $("#loginForm").show();
     $("#chatForm").hide();
+
+    $("#txtMessage").focusin(() => {
+        socket.emit("toi-dang-go-chu");
+    });
+
+    $("#txtMessage").focusout(() => {
+        socket.emit("toi-stop-go-chu");
+    });
 
     $("#btnRegister").click(() => {
         socket.emit("client-send-Username", $("#txtUsername").val());
